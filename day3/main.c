@@ -17,7 +17,7 @@ typedef struct Option {
     int down;
 } Option;
 
-const Option options[5] = {
+const Option options[] = {
     {1, 1},
     {3, 1},
     {5, 1},
