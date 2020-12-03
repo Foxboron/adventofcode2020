@@ -20,8 +20,8 @@ int main(int argc, char *argv[]){
 
     int valid1 = 0;
     int valid2 = 0;
-        // 3-4 f: sgbmjfftf
-    while (fscanf(f, "%d-%d %c: %s", &lower, &upper, &letter, password) >= 4){
+    // 3-4 f: sgbmjfftf
+    while (fscanf(f, "%d-%d %c: %s\n", &lower, &upper, &letter, password) >= 4){
         /* printf("lower: %d upper: %d letter: %c password: %s\n", lower, upper, letter, password); */
         int count = 0;
         for (i = 0; i < strlen(password); i++){
