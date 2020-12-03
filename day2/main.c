@@ -4,8 +4,7 @@
 
 int main(int argc, char *argv[]){
     FILE *f;
-    char line[256];
-    int lower, upper;
+    int lower, upper, i;
     char letter;
     char password[255];
 
@@ -21,11 +20,9 @@ int main(int argc, char *argv[]){
 
     int valid1 = 0;
     int valid2 = 0;
-    while (fgets(line, sizeof(line), f)) {
         // 3-4 f: sgbmjfftf
-        sscanf(line, "%d-%d %c: %s", &lower, &upper, &letter, password);
+    while (fscanf(f, "%d-%d %c: %s", &lower, &upper, &letter, password) >= 4){
         /* printf("lower: %d upper: %d letter: %c password: %s\n", lower, upper, letter, password); */
-        int i;
         int count = 0;
         for (i = 0; i < strlen(password); i++){
             if (letter == password[i]){
@@ -41,6 +38,6 @@ int main(int argc, char *argv[]){
         valid2++;
     }
     printf("Solution 1: %d\n", valid1);
-    printf("Solution 2:%d\n", valid2);
+    printf("Solution 2: %d\n", valid2);
     return 0;
 }
