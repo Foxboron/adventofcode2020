@@ -3,6 +3,7 @@ project('aoc', 'c')
 progs = [
   'day1',
   'day2',
+  'day3',
 ]
 
 foreach p : progs
