@@ -40,7 +40,8 @@ bool check_policy(Passport pass){
 int main(int argc, char *argv[]){
     FILE *f;
     char line[255];
-    char * pch;
+    char *rest = NULL;
+    char *token;
     char key[3];
     char field[255];
     int valid = 0;
@@ -57,60 +58,42 @@ int main(int argc, char *argv[]){
     }
 
     Passport pass = {0};
-    int count = 0;
-    bool ret;
     while (fgets(line, sizeof(line), f)) {
-
         if (strlen(line) == 1){
-            //printf(line);
             passports++;
-            ret = check_policy(pass);
-            if (count >= 7){
-                //printf("Valid\n\n");
+            if (check_policy(pass)){
                 valid++;
-            }else{
-                //printf("Invalid\n\n");
             }
-            //pass = EmptyStruct;
-            count = 0;
+            pass = EmptyStruct;
             continue;
         }
 
-        pch = strtok (line, " ");
-        while (pch != NULL){
-            sscanf(pch, "%3s:%255s", key, field);
-            printf("key: %s field: %s\n", key, field);
-            pch = strtok (NULL, " ");
+        token = strtok_r (line, " ", &rest);
+        while (token != NULL){
+            sscanf(token, "%3s:%255s", key, field);
+            token = strtok_r(NULL, " ", &rest);
             if (strcmp(key, "byr") == 0){
-                count++;
                 strcpy(pass.byr, field);
             }
             if (strcmp(key, "iyr") == 0){
-                count++;
                 strcpy(pass.iyr, field);
             }
             if (strcmp(key, "eyr") == 0){
-                count++;
                 strcpy(pass.eyr, field);
             }
             if (strcmp(key, "hgt") == 0){
-                count++;
                 strcpy(pass.hgt, field);
             }
             if (strcmp(key, "hcl") == 0){
-                count++;
                 strcpy(pass.hcl, field);
             }
             if (strcmp(key, "ecl") == 0){
-                count++;
                 strcpy(pass.ecl, field);
             }
             if (strcmp(key, "pid") == 0){
-                count++;
                 strcpy(pass.pid, field);
             }
             if (strcmp(key, "cid") == 0){
-                count++;
                 strcpy(pass.cid, field);
             }
         }
